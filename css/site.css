@@ -1,0 +1,64 @@
+
+/* GENERAL STUFF */
+
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,300);
+
+html,body {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 14px;
+}
+
+#main-wrapper {
+    padding-top: 50px;
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #1FB18A;
+    border: none;
+    height: 40px;
+    width: 40px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+    background: #1B9172;
+    color: #ffffff;
+}
+
+
+/* HEADER */
+
+.header {
+    text-align: center;
+    background-color: #F8F8F8;
+    padding: 30px 0px 30px 0px;
+}
+
+.header h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+.header h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-style: italic;
+}
+
+/* GRID VIEW */
+
+#gridView1, #gridView2, #grid{
+    text-align: center;
+}
