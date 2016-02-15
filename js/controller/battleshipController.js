@@ -3,8 +3,12 @@
 
 var BattleshipController = function(view, model) {
 
-    view.playerText.click(function() {
-        view.sunkenShips.html(3);
-    });
+    for(var i = 0; i < view.gridButtons.length; i++) {
+        view.gridButtons.eq(i).click(this.test);
+    }
 
+}
+
+BattleshipController.prototype.test = function() {
+    alert("test");
 }

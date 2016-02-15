@@ -27,6 +27,10 @@ var GridView = function (container, model, size) {
 
     this.grid = container.find("#grid");
     this.grid.html(drawGrid(size));
+    this.gridButtons = this.grid.children().children();
+
+    // Hur man kmr åt en enstaka ruta
+    //this.gridButtons.eq(10).css( "background-color", "red" );
 
     this.placedShips = container.find("#placedShips");
     this.placedShips.html(0);
