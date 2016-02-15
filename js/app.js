@@ -1,11 +1,12 @@
+// Whole-script strict mode syntax
+"use strict";
+
 $(function() {
 
-    var player1Model = new BattleshipModel();
-    var player1Grid = new GridView($("#gridView1"), player1Model, 1);
-    var player1Controller = new BattleshipController(player1Grid, player1Model);
+    var size = 9;
+    var board = new BattleshipBoard(size);
+    var playerGrid = new GridView($("#gridView"), board, size);
+    var playerController = new BattleshipController(playerGrid, board);
 
-    var player2Model = new BattleshipModel();
-    var player2Grid = new GridView($("#gridView2"), player2Model, 2);
-    var player2Controller = new BattleshipController(player2Grid, player2Model);
 
 });

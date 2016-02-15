@@ -23,16 +23,27 @@
             </div>
         </div>
 
-        <div id="main-wrapper" class="row">
+        <div id="main-wrapper">
 
-            <div id="gridView1" class="col-md-4 col-md-offset-1">
-                <h1 id="playerText"></h1>
-                <div id="grid"></div>
-            </div>
+            <div id="gridView" class="row">
 
-            <div id="gridView2" class="col-md-4 col-md-offset-2">
-                <h1 id="playerText"></h1>
-                <div id="grid"></div>
+                <div class="col-md-2">
+                    <div id="placeShips"></div>
+                </div>
+
+                <div class="col-md-5 col-md-offset-1">
+                    <h1 id="playerText"></h1>
+                    <div id="grid"></div>
+                </div>
+
+                <div class="col-md-2 col-md-offset-1">
+                    <div id="scoreBoard">
+                        <h2>Placed ships: <span id="placedShips"></span></h2>
+                        <h2>Sunken ships: <span id="sunkenShips"></span></h2>
+                        <h2>Total shots: <span id="totalShots"></span></h2>
+                    </div>
+                </div>
+
             </div>
 
 

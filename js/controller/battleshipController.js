@@ -1,8 +1,10 @@
+// Whole-script strict mode syntax
+"use strict";
 
 var BattleshipController = function(view, model) {
 
     view.playerText.click(function() {
-        alert("hej från spelare " + view.player);
+        view.sunkenShips.html(3);
     });
 
 }
