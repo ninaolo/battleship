@@ -1,14 +1,27 @@
 // Whole-script strict mode syntax
 "use strict";
 
-var BattleshipController = function(view, model) {
+function BattleshipController(playerGrid, board) {
 
-    for(var i = 0; i < view.gridButtons.length; i++) {
-        view.gridButtons.eq(i).click(this.test);
+
+
+    this.board = board;
+    this.playerGrid = playerGrid;
+    this.hej = "hej";
+
+    for(var i = 0; i < playerGrid.gridButtons.length; i++) {
+        playerGrid.gridButtons.eq(i).click(this.placeShip);
     }
+
+    this.placeShip();
 
 }
 
-BattleshipController.prototype.test = function() {
-    alert("test");
+BattleshipController.prototype.placeShip = function() {
+    var x = $(this).data("x");
+    //var y = $(this).data("y");
+    //alert("X:" + x + " Y:" + y);
+    alert(this.hej);
+    this.board.placeShip(x, y);
+    this.playerGrid.updateGrid();
 }
