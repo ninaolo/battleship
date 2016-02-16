@@ -1,10 +1,10 @@
 // Whole-script strict mode syntax
 "use strict";
 
-function GridView(container, model, size) {
+function GridView(container, board, size) {
 
     this.container = container;
-    this.model = model;
+    this.boardModel = board;
     this.size = size;
 
     this.playerText = this.container.find("#playerText");
@@ -44,5 +44,14 @@ GridView.prototype.drawGrid = function() {
 }
 
 GridView.prototype.updateGrid = function() {
-    alert("updating");
+
+    for(var i = 0; i < this.gridButtons.length; i++) {
+        var x = this.gridButtons[i].getAttribute("data-x");
+        var y = this.gridButtons[i].getAttribute("data-y");
+        if (this.boardModel.board[x][y] == -1) {
+            this.gridButtons.eq(i).addClass("active");
+        } else {
+            this.gridButtons.eq(i).removeClass("active");
+        }
+    }
 }

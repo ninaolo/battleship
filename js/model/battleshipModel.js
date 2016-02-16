@@ -20,5 +20,5 @@ function BattleshipBoard(size) {
  means it's occupied
  */
 BattleshipBoard.prototype.placeShip = function(x, y) {
-    this.board[x][y] * (-1);
+    this.board[x][y] *= (-1);
 }
