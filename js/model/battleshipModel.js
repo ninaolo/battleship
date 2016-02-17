@@ -1,9 +1,14 @@
 // Whole-script strict mode syntax
 "use strict";
 
-function BattleshipBoard(size) {
+function BattleshipModel(size) {
 
-    this.board = new Array(size);
+    this.size = size;
+    this.board = new Array(this.size);
+
+    this.placedShips = 0;
+    this.sunkenShips = 0;
+    this.totalShots = 0;
 
     for (var row = 0; row < size; row++) {
         this.board[row] = new Array(size);
@@ -19,6 +24,12 @@ function BattleshipBoard(size) {
  The value 1 means it's empty and the value -1
  means it's occupied
  */
-BattleshipBoard.prototype.placeShip = function(x, y) {
+BattleshipModel.prototype.placeShip = function(x, y) {
     this.board[x][y] *= (-1);
+    if (this.board[x][y] == -1) {
+        this.placedShips += 1;
+    } else {
+        this.placedShips -= 1;
+    }
+
 }

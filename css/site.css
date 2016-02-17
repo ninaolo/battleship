@@ -59,7 +59,7 @@ h2 {
 
 /* GRID VIEW */
 
-#gridView, #grid{
+#gridView, #grid, #gridTitle {
     text-align: center;
 }
 

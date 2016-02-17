@@ -25,14 +25,16 @@
 
         <div id="main-wrapper">
 
-            <div id="gridView" class="row">
+            <div id="battleshipView" class="row">
 
                 <div class="col-md-2">
                     <div id="placeShips"></div>
+                    <br>
+                    <button id="startButton" class="btn btn-warning">Start Game</button>
                 </div>
 
-                <div class="col-md-5 col-md-offset-1">
-                    <h1 id="playerText"></h1>
+                <div class="col-md-6 col-md-offset-1">
+                    <h1 id="gridTitle">Your fleet</h1>
                     <div id="grid"></div>
                 </div>
 
@@ -60,7 +62,7 @@
 <!-- The application JavaScript code -->
 <script src="js/app.js"></script>
 <script src="js/model/battleshipModel.js"></script>
-<script src="js/view/gridView.js"></script>
+<script src="js/view/battleshipView.js"></script>
     <script src="js/controller/battleshipController.js"></script>
 
 </body>

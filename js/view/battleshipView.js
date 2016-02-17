@@ -1,0 +1,69 @@
+// Whole-script strict mode syntax
+"use strict";
+
+function BattleshipView(container, battleshipModel) {
+
+    this.container = container;
+    this.battleshipModel = battleshipModel;
+    this.gridSize = battleshipModel.size;
+
+    this.placeShips = this.container.find("#placeShips");
+    this.placeShips.html("hej");
+    this.startButton = this.container.find("#startButton");
+
+    this.grid = this.container.find("#grid");
+    this.grid.html(this.drawGrid());
+    this.gridButtons = this.grid.children().children();
+
+    // Hur man kmr åt en enstaka ruta
+    //this.gridButtons.eq(10).css( "background-color", "red" );
+    // Vet ej varför inte [10] funkar... den får nåt annat objekt då
+
+    this.placedShips = this.container.find("#placedShips");
+    this.sunkenShips = this.container.find("#sunkenShips");
+    this.totalShots = this.container.find("#totalShots");
+    this.updateScoreBoard();
+
+}
+
+BattleshipView.prototype.drawGrid = function() {
+    var html = "";
+
+    for (var row = 0; row < this.gridSize; row++) {
+        html += "<div class='row'>";
+
+        for (var col = 0; col < this.gridSize; col++) {
+            html += "<button data-x=" + col + " data-y=" + (this.gridSize-row-1) + " class='btn btn-primary'>.</button>";
+        }
+        html += "</div>";
+    }
+    return html;
+}
+
+BattleshipView.prototype.updateGrid = function(shooting) {
+
+    for(var i = 0; i < this.gridButtons.length; i++) {
+
+        if (shooting) {
+            $(this.gridButtons[i]).removeClass("active");
+        } else {
+            var x = this.gridButtons[i].getAttribute("data-x");
+            var y = this.gridButtons[i].getAttribute("data-y");
+            if (this.battleshipModel.board[x][y] == -1) {
+                $(this.gridButtons[i]).addClass("active");
+            } else {
+                $(this.gridButtons[i]).removeClass("active");
+            }
+        }
+
+    }
+
+
+
+}
+
+BattleshipView.prototype.updateScoreBoard = function() {
+    this.placedShips.html(this.battleshipModel.placedShips);
+    this.sunkenShips.html(this.battleshipModel.sunkenShips);
+    this.totalShots.html(this.battleshipModel.totalShots);
+}
