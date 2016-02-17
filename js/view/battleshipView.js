@@ -44,25 +44,29 @@ BattleshipView.prototype.updateGrid = function(shooting) {
 
     for(var i = 0; i < this.gridButtons.length; i++) {
 
+        var x = this.gridButtons[i].getAttribute("data-x");
+        var y = this.gridButtons[i].getAttribute("data-y");
+
         if (shooting) {
-            $(this.gridButtons[i]).removeClass("active");
+            $(this.gridButtons[i]).removeClass("active").html(".");
+            if (this.battleshipModel.isHit(x, y)) {
+                $(this.gridButtons[i]).addClass("hit").html("S");
+            } else if (this.battleshipModel.isMiss(x, y)) {
+                $(this.gridButtons[i]).addClass("active").html(".");
+            }
         } else {
-            var x = this.gridButtons[i].getAttribute("data-x");
-            var y = this.gridButtons[i].getAttribute("data-y");
-            if (this.battleshipModel.board[x][y] == -1) {
-                $(this.gridButtons[i]).addClass("active");
+            if (this.battleshipModel.hasShip(x, y)) {
+                $(this.gridButtons[i]).addClass("active").html("S");
             } else {
-                $(this.gridButtons[i]).removeClass("active");
+                $(this.gridButtons[i]).removeClass("active").html(".");
             }
         }
 
     }
 
-
-
 }
 
-BattleshipView.prototype.updateScoreBoard = function() {
+BattleshipView.prototype.updateScoreBoard = function(shooting) {
     this.placedShips.html(this.battleshipModel.placedShips);
     this.sunkenShips.html(this.battleshipModel.sunkenShips);
     this.totalShots.html(this.battleshipModel.totalShots);

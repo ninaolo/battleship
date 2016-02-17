@@ -20,24 +20,30 @@ BattleshipController.prototype.setEventListeners = function() {
 }
 
 BattleshipController.prototype.gridClick = function(e) {
+    var x = parseInt(e.target.getAttribute('data-x'));
+    var y = parseInt(e.target.getAttribute('data-y'));
     if (this.shooting) {
-        alert("shoot!");
+        this.shoot(x, y);
     } else {
-        this.placeShip(e);
+        this.placeShip(x, y);
     }
 }
 
-BattleshipController.prototype.placeShip = function(e) {
-    var x = parseInt(e.target.getAttribute('data-x'));
-    var y = parseInt(e.target.getAttribute('data-y'));
+BattleshipController.prototype.placeShip = function(x, y) {
     //alert("X:" + x + " Y:" + y);
     this.battleshipModel.placeShip(x, y);
     this.battleshipView.updateGrid(this.shooting);
-    this.battleshipView.updateScoreBoard();
+    this.battleshipView.updateScoreBoard(this.shooting);
 }
 
 BattleshipController.prototype.startGame = function() {
     this.shooting = true;
     this.battleshipView.updateGrid(this.shooting);
 
+}
+
+BattleshipController.prototype.shoot = function(x, y) {
+    this.battleshipModel.shoot(x, y);
+    this.battleshipView.updateGrid(this.shooting);
+    this.battleshipView.updateScoreBoard(this.shooting);
 }
