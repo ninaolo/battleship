@@ -43,17 +43,18 @@ BattleshipController.prototype.gridClick = function(e) {
 }
 
 BattleshipController.prototype.hoverEffect = function(e) {
-    if (!(this.selectedShip == null)) {
-        var x = parseInt(e.target.getAttribute('data-x'));
-        var y = parseInt(e.target.getAttribute('data-y'));
-        for (var i = 0; i < this.selectedShip.size; i++) {
-            $("[data-x=" + (x+i) + "][data-y=" + y + "]").toggleClass("active");
+    if (this.shooting == false) {
+        if (!(this.selectedShip == null)) {
+            var x = parseInt(e.target.getAttribute('data-x'));
+            var y = parseInt(e.target.getAttribute('data-y'));
+            for (var i = 0; i < this.selectedShip.size; i++) {
+                $("[data-x=" + (x+i) + "][data-y=" + y + "]").toggleClass("active");
+            }
         }
     }
 }
 
 BattleshipController.prototype.placeShip = function(x, y) {
-    //alert("X:" + x + " Y:" + y);
     this.battleshipModel.placeShip(x, y, this.selectedShip);
     this.battleshipView.updateGrid(this.shooting);
     this.battleshipView.updateScoreBoard(this.shooting);
@@ -61,6 +62,7 @@ BattleshipController.prototype.placeShip = function(x, y) {
 
 BattleshipController.prototype.startGame = function() {
     this.shooting = true;
+    this.selectedShip = null;
     this.battleshipView.updateGrid(this.shooting);
 
 }

@@ -52,6 +52,10 @@ BattleshipView.prototype.createShipButtons = function() {
     this.ships.html(html);
 }
 
+BattleshipView.prototype.updateShipButtons = function() {
+
+}
+
 BattleshipView.prototype.updateGrid = function(shooting) {
 
     for(var i = 0; i < this.gridButtons.length; i++) {
