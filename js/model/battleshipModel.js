@@ -4,33 +4,34 @@
 function BattleshipModel(size) {
 
     this.size = size;
-    this.board = new Array(this.size);
-
-    this.placedShips = 0;
-    this.sunkenShips = 0;
-    this.totalShots = 0;
 
     this.CONST_EMPTY = 0;
     this.CONST_SHIP = 1;
     this.CONST_HIT = 2;
     this.CONST_MISS = 3;
+    this.CONST_NR_OF_SHIPS = 5;
 
+    this.init();
+}
 
+BattleshipModel.prototype.init = function() {
+    this.placedShips = 0;
+    this.sunkenShips = 0;
+    this.totalShots = 0;
 
-    for (var row = 0; row < size; row++) {
-        this.board[row] = new Array(size);
-        for (var col = 0; col < size; col++) {
+    this.createNewBoard();
+    this.createNewShips();
+
+}
+
+BattleshipModel.prototype.createNewBoard = function() {
+    this.board = new Array(this.size);
+    for (var row = 0; row < this.size; row++) {
+        this.board[row] = new Array(this.size);
+        for (var col = 0; col < this.size; col++) {
             this.board[row][col] = this.CONST_EMPTY;
         }
     }
-
-
-    this.ships = new Array();
-    this.ships.push(new ShipModel(5,"Aircraft carrier"));
-    this.ships.push(new ShipModel(4,"Battleship"));
-    this.ships.push(new ShipModel(3,"Submarine"));
-    this.ships.push(new ShipModel(3,"Cruiser"));
-    this.ships.push(new ShipModel(2,"Destroyer"));
 }
 
 BattleshipModel.prototype.placeShip = function(x, y,selectedShip) {
@@ -63,6 +64,16 @@ BattleshipModel.prototype.placeShip = function(x, y,selectedShip) {
 
 }
 
+// Both used for creating new and doing reset of ships
+BattleshipModel.prototype.createNewShips = function() {
+    this.ships = new Array();
+    this.ships.push(new ShipModel(5,"Aircraft carrier"));
+    this.ships.push(new ShipModel(4,"Battleship"));
+    this.ships.push(new ShipModel(3,"Submarine"));
+    this.ships.push(new ShipModel(3,"Cruiser"));
+    this.ships.push(new ShipModel(2,"Destroyer"));
+}
+
 
 BattleshipModel.prototype.computerGeneratePositions = function(){
     //Clear all placed ships
@@ -73,7 +84,6 @@ BattleshipModel.prototype.computerGeneratePositions = function(){
             tempSelectedShip.removeShip();
         }
     }
-
 
     //Iterate until all ships are placed
 
@@ -89,9 +99,9 @@ BattleshipModel.prototype.computerGeneratePositions = function(){
 }
 
 
-BattleshipModel.prototype.randomBoolean = function(){
+BattleshipModel.prototype.randomBoolean = function() {
     var val = Math.round(Math.random())
-    if (val>0){
+    if (val > 0) {
         return false;
     }
     return true;
@@ -112,9 +122,9 @@ BattleshipModel.prototype.clearPositions = function(selectedShip){
 }
 
 
-BattleshipModel.prototype.gameOver = function(){
-    for(var i=0;i<this.ships.length;i++){
-        if(!this.ships[i].isSunken){
+BattleshipModel.prototype.gameOver = function() {
+    for(var i = 0; i < this.ships.length; i++) {
+        if(!this.ships[i].isSunken) {
             return false;
         }
     }
@@ -143,15 +153,15 @@ BattleshipModel.prototype.shoot = function(x, y) {
         var selectedShip = this.getSelectedShip(x,y);
         selectedShip.hit(x,y);
         if(selectedShip.checkIfSunken()){
-            alert("YOU SUNK A "+selectedShip.name+"!!!!!");
+            alert("YOU SUNK THE "+selectedShip.name+"!!!!!");
             this.sunkenShips += 1;
         }
         else{
-            alert("HIT! You hit a "+selectedShip.name);
+            alert("HIT! You hit the "+selectedShip.name + ".");
         }
         this.totalShots += 1;
         if(this.gameOver()){
-            alert("You won! You sank all the ships with "+this.totalShots+" shots");
+            alert("You won! You sank all the ships with "+this.totalShots+" shots.");
         }
     }
 }

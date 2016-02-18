@@ -32,8 +32,8 @@
                     <div id="ships"></div>
                     <br>
                     <button id="alignmentButton" class="btn btn-warning">Change Direction</button>
-                    <button id="computerGenerate" class="btn btn-warning">Computer Genereated</button>
-                    <button id="startButton" class="btn btn-warning">Start Game</button>
+                    <br><br>
+                    <button id="computerGenerate" class="btn btn-warning">Genereate Ships</button>
                 </div>
 
                 <div class="col-md-6 col-md-offset-1">
@@ -43,11 +43,29 @@
 
                 <div class="col-md-2 col-md-offset-1" id="rightSide">
                     <h2><b>Scoreboard</b></h2>
-                    <div id="scoreBoard">
-                        <h2>Placed ships: <span id="placedShips"></span></h2>
-                        <h2>Sunken ships: <span id="sunkenShips"></span></h2>
-                        <h2>Total shots: <span id="totalShots"></span></h2>
+                    <div id="scoreBoard" class="row">
+                        <div class="col-md-9">
+                            <h2>Placed ships:</h2>
+                            <h2>Sunken ships:</h2>
+                            <h2>Total shots:</h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h2><span id="placedShips"></span></h2>
+                            <h2><span id="sunkenShips"></span></h2>
+                            <h2><span id="totalShots"></span></h2>
+                        </div>
                     </div>
+
+                    <h2><b>Played Games</b></h2>
+                    <div id="playedGames" class="row">
+                        <div class="col-md-3" id="gameID">
+                        </div>
+                        <div class="col-md-9" id="nrOfShots">
+                        </div>
+                    </div>
+
+                    <button id="startButton" class="btn btn-warning">Start Game</button>
+                    <button id="endButton" class="btn btn-warning">End Game</button>
                 </div>
 
             </div>

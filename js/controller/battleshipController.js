@@ -8,6 +8,7 @@ function BattleshipController(battleshipView, battleshipModel) {
     this.shooting = false;
     this.selectedShip = null;
     this.setEventListeners();
+    this.nrOfPlayedGames = 0;
 
 }
 
@@ -20,6 +21,7 @@ BattleshipController.prototype.setEventListeners = function() {
     }
 
     $(this.battleshipView.startButton).on("click", this.startGame.bind(this));
+    $(this.battleshipView.endButton).on("click", this.endGame.bind(this));
     $(this.battleshipView.alignmentButton).on("click", this.changeDirection.bind(this));
     $(this.battleshipView.computerGenerate).on("click", this.generatePositions.bind(this));
 
@@ -41,6 +43,7 @@ BattleshipController.prototype.gridClick = function(e) {
         this.shoot(x, y);
     } else {
         this.placeShip(x, y);
+        this.battleshipView.updateShipButtons();
     }
 }
 
@@ -64,15 +67,17 @@ BattleshipController.prototype.placeShip = function(x, y) {
         }
     }
 
-    
     this.battleshipView.updateGrid(this.shooting);
     this.battleshipView.updateScoreBoard(this.shooting);
 }
 
-BattleshipController.prototype.startGame = function() {
+BattleshipController.prototype.startGame = function(e) {
     if(this.battleshipModel.allShipsPlaced()){
         this.shooting = true;
         this.battleshipView.updateGrid(this.shooting);
+        $(e.target).hide();
+        this.battleshipView.endButton.show();
+        $("#gridTitle").hide().html("Enemy fleet. Shoot!").fadeIn();
     }
     else{
         alert("You need to place all your ships before you can start the game");
@@ -80,6 +85,22 @@ BattleshipController.prototype.startGame = function() {
 
 }
 
+BattleshipController.prototype.endGame = function(e) {
+    this.shooting = false;
+    this.nrOfPlayedGames += 1;
+    if (this.battleshipModel.sunkenShips == this.battleshipModel.CONST_NR_OF_SHIPS) {
+        this.battleshipView.addNewPlayedGame(this.nrOfPlayedGames, this.battleshipModel.totalShots);
+    } else {
+        this.battleshipView.addNewPlayedGame(this.nrOfPlayedGames, 0);
+    }
+    $("#gridTitle").hide().html("Your fleet").fadeIn();
+    $(e.target).hide();
+    this.battleshipModel.init(); // Resets all ships and scores
+    this.battleshipView.startButton.show();
+    this.battleshipView.updateGrid();
+    this.battleshipView.updateScoreBoard();
+    this.battleshipView.updateShipButtons();
+}
 
 BattleshipController.prototype.changeDirection = function() {
     var battleShips = this.battleshipModel.ships;

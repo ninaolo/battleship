@@ -12,11 +12,11 @@ function BattleshipView(container, battleshipModel) {
     this.shipButtons = this.container.find("[id=shipButton]");
 
     this.startButton = this.container.find("#startButton");
-
+    this.endButton = this.container.find("#endButton");
+    this.endButton.hide();
     this.alignmentButton = this.container.find("#alignmentButton");
-
     this.computerGenerate = this.container.find("#computerGenerate");
-    
+
     this.grid = this.container.find("#grid");
     this.grid.html(this.drawGrid());
     this.gridButtons = this.grid.children().children();
@@ -57,7 +57,13 @@ BattleshipView.prototype.createShipButtons = function() {
 }
 
 BattleshipView.prototype.updateShipButtons = function() {
-    // Hämta info från battleshipmodel.ships
+    for (var i = 0; i < this.battleshipModel.ships.length; i++) {
+        if (this.battleshipModel.ships[i].isPlaced) {
+            $("[data-shipID=" + i + "]").hide(300);
+        } else {
+            $("[data-shipID=" + i + "]").show(300);
+        }
+    }
 }
 
 BattleshipView.prototype.updateGrid = function(shooting) {
@@ -76,13 +82,22 @@ BattleshipView.prototype.updateGrid = function(shooting) {
             }
         } else {
             if (this.battleshipModel.hasShip(x, y)) {
-                console.log(x + " " + y);
                 $(this.gridButtons[i]).addClass("active").html("S");
             } else {
                 $(this.gridButtons[i]).removeClass("active").html(".");
+                $(this.gridButtons[i]).removeClass("hit").html(".");
             }
         }
 
+    }
+}
+
+BattleshipView.prototype.addNewPlayedGame = function(gameID, shots) {
+    this.container.find("#gameID").append("<h2>#" + gameID + "</h2>");
+    if (shots == 0) {
+        this.container.find("#nrOfShots").append("<h2>lost game</h2>");
+    } else {
+        this.container.find("#nrOfShots").append("<h2>" + shots + " shots</h2>");
     }
 
 }
