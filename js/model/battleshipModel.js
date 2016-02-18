@@ -88,6 +88,7 @@ BattleshipModel.prototype.computerGeneratePositions = function(){
     }
 }
 
+
 BattleshipModel.prototype.randomBoolean = function(){
     var val = Math.round(Math.random())
     if (val>0){
