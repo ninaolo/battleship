@@ -33,7 +33,7 @@ BattleshipView.prototype.drawGrid = function() {
         html += "<div class='row'>";
 
         for (var col = 0; col < this.gridSize; col++) {
-            html += "<button data-x=" + col + " data-y=" + (this.gridSize-row-1) + " class='btn btn-primary'>.</button>";
+            html += "<button id=7 data-x=" + col + " data-y=" + (this.gridSize-row-1) + " class='btn btn-primary'>.</button>";
         }
         html += "</div>";
     }

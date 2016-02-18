@@ -14,6 +14,8 @@ BattleshipController.prototype.setEventListeners = function() {
 
     for(var i = 0; i < this.battleshipView.gridButtons.length; i++) {
         $(this.battleshipView.gridButtons[i]).on("click", this.gridClick.bind(this));
+        $(this.battleshipView.gridButtons[i]).on("mouseenter", this.hoverEffect.bind(this));
+        $(this.battleshipView.gridButtons[i]).on("mouseleave", this.hoverEffect.bind(this));
     }
 
     $(this.battleshipView.startButton).on("click", this.startGame.bind(this));
@@ -27,6 +29,12 @@ BattleshipController.prototype.gridClick = function(e) {
     } else {
         this.placeShip(x, y);
     }
+}
+
+BattleshipController.prototype.hoverEffect = function(e) {
+    var x = parseInt(e.target.getAttribute('data-x'));
+    var y = parseInt(e.target.getAttribute('data-y'));
+    $("[data-x=" + (x+1) + "][data-y=" + y + "]").toggleClass("active");
 }
 
 BattleshipController.prototype.placeShip = function(x, y) {

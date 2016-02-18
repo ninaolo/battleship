@@ -21,7 +21,6 @@ function BattleshipModel(size) {
             this.board[row][col] = this.CONST_EMPTY;
         }
     }
-
 }
 
 BattleshipModel.prototype.placeShip = function(x, y) {
