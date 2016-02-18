@@ -21,6 +21,7 @@ BattleshipController.prototype.setEventListeners = function() {
 
     $(this.battleshipView.startButton).on("click", this.startGame.bind(this));
     $(this.battleshipView.alignmentButton).on("click", this.changeDirection.bind(this));
+    $(this.battleshipView.computerGenerate).on("click", this.generatePositions.bind(this));
 
     for(var i = 0; i < this.battleshipView.shipButtons.length; i++) {
         $(this.battleshipView.shipButtons[i]).on("click", this.selectShip.bind(this));
@@ -77,6 +78,12 @@ BattleshipController.prototype.changeDirection = function() {
     for(var i=0;i<battleShips.length;i++){
         battleShips[i].isHorizantal = (!battleShips[i].isHorizantal)
     }
+}
+
+BattleshipController.prototype.generatePositions = function() {
+    this.battleshipModel.computerGeneratePositions();
+    this.battleshipView.updateGrid(this.shooting);
+    this.battleshipView.updateScoreBoard(this.shooting);
 }
 
 

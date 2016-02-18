@@ -14,6 +14,8 @@ function BattleshipView(container, battleshipModel) {
     this.startButton = this.container.find("#startButton");
 
     this.alignmentButton = this.container.find("#alignmentButton");
+
+    this.computerGenerate = this.container.find("#computerGenerate");
     
     this.grid = this.container.find("#grid");
     this.grid.html(this.drawGrid());

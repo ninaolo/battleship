@@ -62,6 +62,39 @@ BattleshipModel.prototype.placeShip = function(x, y,selectedShip) {
 
 }
 
+
+BattleshipModel.prototype.computerGeneratePositions = function(){
+    //Clear all placed ships
+    for(var i=0;i<this.ships.length;i++){
+        var tempSelectedShip = this.ships[i];
+        if(tempSelectedShip.isPlaced){
+            this.clearPositions(tempSelectedShip);
+            tempSelectedShip.removeShip();
+        }
+    }
+
+
+    //Iterate until all ships are placed
+
+    for(var i=0;i<this.ships.length;i++){
+        var selectedShip = this.ships[i]
+        selectedShip.isHorizantal = this.randomBoolean();
+        while(!selectedShip.isPlaced){
+            var x = Math.floor(Math.random() * (this.board.length-1))
+            var y = Math.floor(Math.random() * (this.board.length-1))
+            this.placeShip(x,y,selectedShip);
+        }
+    }
+}
+
+BattleshipModel.prototype.randomBoolean = function(){
+    var val = Math.round(Math.random())
+    if (val>0){
+        return false;
+    }
+    return true;
+}
+
 BattleshipModel.prototype.clearPositions = function(selectedShip){
     var array = selectedShip.getPosition();
 
