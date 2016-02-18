@@ -43,9 +43,13 @@ BattleshipController.prototype.gridClick = function(e) {
 }
 
 BattleshipController.prototype.hoverEffect = function(e) {
-    var x = parseInt(e.target.getAttribute('data-x'));
-    var y = parseInt(e.target.getAttribute('data-y'));
-    $("[data-x=" + (x+1) + "][data-y=" + y + "]").toggleClass("active");
+    if (!(this.selectedShip == null)) {
+        var x = parseInt(e.target.getAttribute('data-x'));
+        var y = parseInt(e.target.getAttribute('data-y'));
+        for (var i = 0; i < this.selectedShip.size; i++) {
+            $("[data-x=" + (x+i) + "][data-y=" + y + "]").toggleClass("active");
+        }
+    }
 }
 
 BattleshipController.prototype.placeShip = function(x, y) {

@@ -31,6 +31,10 @@ h2 {
     width: 40px;
 }
 
+.btn-default {
+    width: 130px;
+}
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
     background: #1B9172;
     color: #ffffff;
