@@ -55,7 +55,6 @@ BattleshipController.prototype.hoverEffect = function(e) {
 }
 
 BattleshipController.prototype.placeShip = function(x, y) {
-    //alert("X:" + x + " Y:" + y);
     this.battleshipModel.placeShip(x, y, this.selectedShip);
     this.battleshipView.updateGrid(this.shooting);
     this.battleshipView.updateScoreBoard(this.shooting);
