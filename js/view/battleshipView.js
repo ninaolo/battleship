@@ -7,8 +7,10 @@ function BattleshipView(container, battleshipModel) {
     this.battleshipModel = battleshipModel;
     this.gridSize = battleshipModel.size;
 
-    this.placeShips = this.container.find("#placeShips");
-    this.placeShips.html("hej");
+    this.ships = this.container.find("#ships");
+    this.createShipButtons();
+    this.shipButtons = this.container.find("[id=shipButton]");
+
     this.startButton = this.container.find("#startButton");
 
     this.grid = this.container.find("#grid");
@@ -33,11 +35,21 @@ BattleshipView.prototype.drawGrid = function() {
         html += "<div class='row'>";
 
         for (var col = 0; col < this.gridSize; col++) {
-            html += "<button id=7 data-x=" + col + " data-y=" + (this.gridSize-row-1) + " class='btn btn-primary'>.</button>";
+            html += "<button data-x=" + col + " data-y=" + (this.gridSize-row-1) + " class='btn btn-primary'>.</button>";
         }
         html += "</div>";
     }
     return html;
+}
+
+BattleshipView.prototype.createShipButtons = function() {
+    var html = "";
+
+    for (var i = 0; i < this.battleshipModel.ships.length; i++) {
+        html += "<button id='shipButton' data-shipID='" + i + "' class='btn btn-default'>" + this.battleshipModel.ships[i].name + "</button>";
+        html += "<br><br>"
+    }
+    this.ships.html(html);
 }
 
 BattleshipView.prototype.updateGrid = function(shooting) {
