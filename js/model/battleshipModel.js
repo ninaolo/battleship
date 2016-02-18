@@ -15,6 +15,14 @@ function BattleshipModel(size) {
     this.CONST_HIT = 2;
     this.CONST_MISS = 3;
 
+
+    this.ships = new Array();
+    this.ships.push(new ShipModel(5,"Aircraft carrier"));
+    this.ships.push(new ShipModel(4,"Battleship"));
+    this.ships.push(new ShipModel(3,"Submarine"));
+    this.ships.push(new ShipModel(3,"Cruiser"));
+    this.ships.push(new ShipModel(2,"Destroyer"));
+
     for (var row = 0; row < size; row++) {
         this.board[row] = new Array(size);
         for (var col = 0; col < size; col++) {
@@ -24,12 +32,29 @@ function BattleshipModel(size) {
 }
 
 BattleshipModel.prototype.placeShip = function(x, y) {
-    if (this.hasShip(x, y)) {
-        this.board[x][y] = this.CONST_EMPTY;
-        this.placedShips -= 1;
-    } else {
-        this.board[x][y] = this.CONST_SHIP;
-        this.placedShips += 1;
+
+    var selectedShip = this.ships[0];
+    var validPlacement = true;
+    var validRemove = true;
+
+    for(var i=0;i<selectedShip.size;i++){
+        if(this.hasShip(x+i, y)){
+            validPlacement = false;
+        }
+        if(selectedShip.position[i][0]!=(x+i) && selectedShip.position[i][1]!=y){
+            validRemove = false;
+        }
+    }
+
+    for(var i=0;i<selectedShip.size;i++){
+        if (this.hasShip(x+i, y) && validRemove) {
+            this.board[x+i][y] = this.CONST_EMPTY;
+            this.placedShips -= 1;
+        } 
+        else if(validPlacement) {
+            this.board[x+i][y] = this.CONST_SHIP;
+            this.placedShips += 1;
+        }
     }
 }
 
@@ -55,3 +80,37 @@ BattleshipModel.prototype.shoot = function(x, y) {
         this.sunkenShips += 1;
     }
 }
+
+
+
+
+
+function ShipModel(size,name) {
+
+    this.size = size;
+    this.name = name;
+
+    this.position = new Array()
+    for(var i = 0;i<this.size;i++){
+        this.position.push([null,null]);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
