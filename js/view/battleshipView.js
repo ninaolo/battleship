@@ -53,7 +53,7 @@ BattleshipView.prototype.createShipButtons = function() {
 }
 
 BattleshipView.prototype.updateShipButtons = function() {
-
+    // Hämta info från battleshipmodel.ships
 }
 
 BattleshipView.prototype.updateGrid = function(shooting) {
@@ -72,6 +72,7 @@ BattleshipView.prototype.updateGrid = function(shooting) {
             }
         } else {
             if (this.battleshipModel.hasShip(x, y)) {
+                console.log(x + " " + y);
                 $(this.gridButtons[i]).addClass("active").html("S");
             } else {
                 $(this.gridButtons[i]).removeClass("active").html(".");
