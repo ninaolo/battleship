@@ -34,19 +34,20 @@ function BattleshipModel(size) {
 }
 
 BattleshipModel.prototype.placeShip = function(x, y,selectedShip) {
-
-    var isHorizantal = selectedShip.isHorizantal;
     if(selectedShip==null){
         for(var i=0;i<this.ships.length;i++){
             var tempSelectedShip = this.ships[i];
             if(tempSelectedShip.isPlaced){
-                this.clearPositions(tempSelectedShip);
-                tempSelectedShip.removeShip();
+                if(tempSelectedShip.validRemove(x,y)){
+                    this.clearPositions(tempSelectedShip);
+                    tempSelectedShip.removeShip();
+                }
             }
         }
-    } 
+    }
 
     else if(this.validPlacement(x,y,selectedShip)){
+        var isHorizantal = selectedShip.isHorizantal;
         for(var i=0;i<selectedShip.size;i++){
             this.board[x+(i*isHorizantal)][y+(i*(!isHorizantal))] = this.CONST_SHIP;
         }
