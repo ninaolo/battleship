@@ -98,8 +98,12 @@ BattleshipView.prototype.updateGrid = function(shooting) {
     }
 }
 
-BattleshipView.prototype.addNewPlayedGame = function(playerID, shots) {
-    this.container.find("#playerID").append("<h2>P" + playerID + "</h2>");
+BattleshipView.prototype.addNewPlayedGame = function(playerID, shots,playerVsComputer) {
+    var ai = "";
+    if(playerVsComputer){
+        ai = " vs AI";
+    }
+    this.container.find("#playerID").append("<h2>P" + playerID + ai+"</h2>");
     if (shots === 0) {
         this.container.find("#nrOfShots").append("<h2>lost game</h2>");
     } else {

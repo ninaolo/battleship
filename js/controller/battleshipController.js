@@ -94,13 +94,14 @@ BattleshipController.prototype.startGame = function(e) {
 BattleshipController.prototype.endGame = function(e) {
     this.shooting = false;
     if (this.battleshipModel.sunkenShips === this.battleshipModel.CONST_NR_OF_SHIPS) {
-        this.battleshipView.addNewPlayedGame(this.playerID, this.battleshipModel.totalShots);
+        this.battleshipView.addNewPlayedGame(this.playerID, this.battleshipModel.totalShots,this.playerVsComputer);
     } else {
-        this.battleshipView.addNewPlayedGame(this.playerID, 0);
+        this.battleshipView.addNewPlayedGame(this.playerID, 0,this.playerVsComputer);
     }
     $("#gridTitle").hide().html("Your fleet").fadeIn();
     $("#playerText").html("PLAYER " + this.playerID);
     $(e.target).hide();
+    this.playerVsComputer = false;
     this.battleshipModel.init(); // Resets all ships and scores
     this.battleshipView.startButton.show();
     this.battleshipView.updateGrid(this.shooting);
