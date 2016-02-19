@@ -9,6 +9,8 @@ function BattleshipController(battleshipView, battleshipModel) {
     this.selectedShip = null;
     this.setEventListeners();
     this.playerID = 1;
+    $('#playerText').html("PLAYER " + this.playerID);
+
 
 }
 
@@ -73,11 +75,14 @@ BattleshipController.prototype.placeShip = function(x, y) {
 
 BattleshipController.prototype.startGame = function(e) {
     if(this.battleshipModel.allShipsPlaced()){
+        if (this.playerID == 1) {this.playerID = 2;}
+        else {this.playerID = 1;}
         this.shooting = true;
         this.battleshipView.updateGrid(this.shooting);
         $(e.target).hide();
         this.battleshipView.endButton.show();
         $("#gridTitle").hide().html("Enemy fleet. Shoot!").fadeIn();
+        $("#playerText").html("PLAYER " + this.playerID);
     }
     else{
         alert("You need to place all your ships before you can start the game");
@@ -92,9 +97,8 @@ BattleshipController.prototype.endGame = function(e) {
     } else {
         this.battleshipView.addNewPlayedGame(this.playerID, 0);
     }
-    if (this.playerID == 1) {this.playerID = 2;}
-    else {this.playerID = 1;}
     $("#gridTitle").hide().html("Your fleet").fadeIn();
+    $("#playerText").html("PLAYER " + this.playerID);
     $(e.target).hide();
     this.battleshipModel.init(); // Resets all ships and scores
     this.battleshipView.startButton.show();
@@ -114,6 +118,7 @@ BattleshipController.prototype.generatePositions = function() {
     this.battleshipModel.computerGeneratePositions();
     this.battleshipView.updateGrid(this.shooting);
     this.battleshipView.updateScoreBoard(this.shooting);
+    this.battleshipView.updateShipButtons();
 }
 
 

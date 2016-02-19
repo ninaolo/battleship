@@ -88,7 +88,7 @@ BattleshipModel.prototype.computerGeneratePositions = function(){
     //Iterate until all ships are placed
 
     for(var i=0;i<this.ships.length;i++){
-        var selectedShip = this.ships[i]
+        var selectedShip = this.ships[i];
         selectedShip.isHorizantal = this.randomBoolean();
         while(!selectedShip.isPlaced){
             var x = Math.floor(Math.random() * (this.board.length-1))
