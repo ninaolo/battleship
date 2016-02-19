@@ -145,7 +145,7 @@ BattleshipModel.prototype.isMiss = function(x, y) {
 }
 
 BattleshipModel.prototype.shoot = function(x, y) {
-    if (this.board[x][y] === this.CONST_EMPTY) {
+    if (this.board[x][y] === this.CONST_EMPTY&&(!this.gameOver())) {
         this.board[x][y] = this.CONST_MISS;
         this.totalShots += 1;
     } else if (this.board[x][y] === this.CONST_SHIP) {
