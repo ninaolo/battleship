@@ -8,7 +8,7 @@ function BattleshipController(battleshipView, battleshipModel) {
     this.shooting = false;
     this.selectedShip = null;
     this.setEventListeners();
-    this.nrOfPlayedGames = 0;
+    this.playerID = 1;
 
 }
 
@@ -48,7 +48,7 @@ BattleshipController.prototype.gridClick = function(e) {
 }
 
 BattleshipController.prototype.hoverEffect = function(e) {
-    if (!(this.selectedShip == null)&&!this.shooting) {
+    if (!(this.selectedShip === null)&&!this.shooting) {
         var x = parseInt(e.target.getAttribute('data-x'));
         var y = parseInt(e.target.getAttribute('data-y'));
         var isHorizantal = this.selectedShip.isHorizantal;
@@ -87,12 +87,13 @@ BattleshipController.prototype.startGame = function(e) {
 
 BattleshipController.prototype.endGame = function(e) {
     this.shooting = false;
-    this.nrOfPlayedGames += 1;
-    if (this.battleshipModel.sunkenShips == this.battleshipModel.CONST_NR_OF_SHIPS) {
-        this.battleshipView.addNewPlayedGame(this.nrOfPlayedGames, this.battleshipModel.totalShots);
+    if (this.battleshipModel.sunkenShips === this.battleshipModel.CONST_NR_OF_SHIPS) {
+        this.battleshipView.addNewPlayedGame(this.playerID, this.battleshipModel.totalShots);
     } else {
-        this.battleshipView.addNewPlayedGame(this.nrOfPlayedGames, 0);
+        this.battleshipView.addNewPlayedGame(this.playerID, 0);
     }
+    if (this.playerID == 1) {this.playerID = 2;}
+    else {this.playerID = 1;}
     $("#gridTitle").hide().html("Your fleet").fadeIn();
     $(e.target).hide();
     this.battleshipModel.init(); // Resets all ships and scores

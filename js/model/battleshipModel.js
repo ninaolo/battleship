@@ -35,7 +35,7 @@ BattleshipModel.prototype.createNewBoard = function() {
 }
 
 BattleshipModel.prototype.placeShip = function(x, y,selectedShip) {
-    if(selectedShip==null){
+    if(selectedShip === null){
         for(var i=0;i<this.ships.length;i++){
             var tempSelectedShip = this.ships[i];
             if(tempSelectedShip.isPlaced){
@@ -133,22 +133,22 @@ BattleshipModel.prototype.gameOver = function() {
 
 
 BattleshipModel.prototype.hasShip = function(x, y) {
-    return this.board[x][y] == this.CONST_SHIP;
+    return this.board[x][y] === this.CONST_SHIP;
 }
 
 BattleshipModel.prototype.isHit = function(x, y) {
-    return this.board[x][y] == this.CONST_HIT;
+    return this.board[x][y] === this.CONST_HIT;
 }
 
 BattleshipModel.prototype.isMiss = function(x, y) {
-    return this.board[x][y] == this.CONST_MISS;
+    return this.board[x][y] === this.CONST_MISS;
 }
 
 BattleshipModel.prototype.shoot = function(x, y) {
-    if (this.board[x][y] == this.CONST_EMPTY) {
+    if (this.board[x][y] === this.CONST_EMPTY) {
         this.board[x][y] = this.CONST_MISS;
         this.totalShots += 1;
-    } else if (this.board[x][y] == this.CONST_SHIP) {
+    } else if (this.board[x][y] === this.CONST_SHIP) {
         this.board[x][y] = this.CONST_HIT;
         var selectedShip = this.getSelectedShip(x,y);
         selectedShip.hit(x,y);
@@ -239,7 +239,7 @@ ShipModel.prototype.removeShip = function(x,y){
 
 ShipModel.prototype.validRemove = function(x,y){
     for(var i = 0;i<this.size;i++){
-        if(this.position[i][0]==x && this.position[i][1] == y){
+        if(this.position[i][0] === x && this.position[i][1] === y){
             return true;
         }
     }
@@ -248,7 +248,7 @@ ShipModel.prototype.validRemove = function(x,y){
 
 ShipModel.prototype.hit = function(x,y){
     for(var i = 0;i<this.size;i++){
-        if(this.position[i][0]==x && this.position[i][1] == y){
+        if(this.position[i][0] === x && this.position[i][1] === y){
             this.position[i][2] = true;
         }
     }
@@ -261,7 +261,7 @@ ShipModel.prototype.getPosition = function(){
 
 ShipModel.prototype.checkIfSunken = function(){
     for(var i = 0;i<this.size;i++){
-        if(this.position[i][2] == false){
+        if(this.position[i][2] === false){
             return false;
         }
     }
