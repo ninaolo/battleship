@@ -9,6 +9,7 @@ function BattleshipController(battleshipView, battleshipModel) {
     this.selectedShip = null;
     this.setEventListeners();
     this.playerID = 1;
+    this.playerVsComputer = false;
     $('#playerText').html("PLAYER " + this.playerID);
 
 
@@ -102,9 +103,9 @@ BattleshipController.prototype.endGame = function(e) {
     $(e.target).hide();
     this.battleshipModel.init(); // Resets all ships and scores
     this.battleshipView.startButton.show();
-    this.battleshipView.updateGrid();
-    this.battleshipView.updateScoreBoard();
-    this.battleshipView.updateShipButtons();
+    this.battleshipView.updateGrid(this.shooting);
+    this.battleshipView.updateScoreBoard(this.shooting);
+    this.battleshipView.updateShipButtons(this.shooting);
 }
 
 BattleshipController.prototype.changeDirection = function() {
@@ -115,10 +116,13 @@ BattleshipController.prototype.changeDirection = function() {
 }
 
 BattleshipController.prototype.generatePositions = function() {
+    this.playerVsComputer = true;
     this.battleshipModel.computerGeneratePositions();
+    this.shooting = true;
     this.battleshipView.updateGrid(this.shooting);
     this.battleshipView.updateScoreBoard(this.shooting);
-    this.battleshipView.updateShipButtons();
+    this.battleshipView.updateShipButtons(this.shooting);
+    this.battleshipView.startButton.click();
 }
 
 

@@ -56,13 +56,19 @@ BattleshipView.prototype.createShipButtons = function() {
     this.ships.html(html);
 }
 
-BattleshipView.prototype.updateShipButtons = function() {
+BattleshipView.prototype.updateShipButtons = function(shooting) {
     for (var i = 0; i < this.battleshipModel.ships.length; i++) {
         if (this.battleshipModel.ships[i].isPlaced) {
             $("[data-shipID=" + i + "]").hide(300);
         } else {
             $("[data-shipID=" + i + "]").show(300);
         }
+        $("#computerGenerate").show();
+        $("#alignmentButton").show();
+    }
+    if (shooting) {
+        $("#computerGenerate").hide();
+        $("#alignmentButton").hide();
     }
 }
 
