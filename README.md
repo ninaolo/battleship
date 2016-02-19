@@ -12,6 +12,8 @@ The difference is that === strictly compares two variables and returns true if t
 
 Strictly speaking, JavaScript does not have classes. However, one can imitate the behavior of classes by using prototypes, but there are differences. Prototypes are a style of object-oriented programming where it is possible to have inheritance between classes by writing a prototype and letting other classes clone from this.
 
+EDIT: JavaScript classes were introduced in ECMAScript 6. These are however 'syntactical sugar' for the existing prototype-based inheritance. 
+
 
 **What is a callback in Javascript?**
 
