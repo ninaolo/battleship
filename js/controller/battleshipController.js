@@ -76,7 +76,7 @@ BattleshipController.prototype.placeShip = function(x, y) {
 
 BattleshipController.prototype.startGame = function(e) {
     if(this.battleshipModel.allShipsPlaced()){
-        if (this.playerID == 1) {this.playerID = 2;}
+        if (this.playerID == 1&&(!this.playerVsComputer)) {this.playerID = 2;}
         else {this.playerID = 1;}
         this.shooting = true;
         this.battleshipView.updateGrid(this.shooting);
