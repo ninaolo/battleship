@@ -80,6 +80,8 @@ BattleshipController.prototype.startGame = function(e) {
         else {this.playerID = 1;}
         this.shooting = true;
         this.battleshipView.updateGrid(this.shooting);
+        this.battleshipView.updateScoreBoard(this.shooting);
+        this.battleshipView.updateShipButtons(this.shooting);
         $(e.target).hide();
         this.battleshipView.endButton.show();
         $("#gridTitle").hide().html("Enemy fleet. Shoot!").fadeIn();
