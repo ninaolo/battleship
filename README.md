@@ -1,7 +1,13 @@
 # Battleship
-This is a game of Battleship written in JavaScript (lab3 of the course DD2390).
+This is a simple game of Battleship written in JavaScript. It was a school project (lab3 of the course DD2390 at KTH).
 
-## Questions
+## Running the app
+Simply open `index.html` in a browser and start playing.
+
+![Screenshot](/screenshot.png?raw=true)
+
+
+## Questions from the lab
 
 **What is the differences between == and ===? What is the best practice for using which?**
 
