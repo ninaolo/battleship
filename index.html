@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Battleship</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+    <!-- Our CSS styling -->
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header row">
+        <div class="col-md-12">
+            <h1>BATTLESHIP</h1>
+        </div>
+    </div>
+
+    <div id="main-wrapper">
+        <div id="battleshipView" class="row">
+
+            <div class="col-md-2" id="leftSide">
+                <h2><b>Place your ships</b></h2>
+                <div id="ships"></div>
+                <br>
+                <button id="alignmentButton" class="btn btn-warning">Change Direction</button>
+                <br><br>
+                <button id="computerGenerate" class="btn btn-warning">Player vs Computer</button>
+            </div>
+
+            <div class="col-md-6 col-md-offset-1">
+                <h1 id="gridTitle">Your fleet</h1>
+                <div id="grid" class="row"></div>
+                <div class='row'>
+                    <center><b><h2 id='playerText'></h2></b></center>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-md-offset-1" id="rightSide">
+                <h2><b>Scoreboard</b></h2>
+                <div id="scoreBoard" class="row">
+                    <div class="col-md-9">
+                        <h2>Placed ships:</h2>
+                        <h2>Sunken ships:</h2>
+                        <h2>Total shots:</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <h2><span id="placedShips"></span></h2>
+                        <h2><span id="sunkenShips"></span></h2>
+                        <h2><span id="totalShots"></span></h2>
+                    </div>
+                </div>
+
+                <h2><b>Played Games</b></h2>
+                <div id="playedGames" class="row">
+                    <div class="col-md-5" id="playerID">
+                    </div>
+                    <div class="col-md-7" id="nrOfShots">
+                    </div>
+                </div>
+
+                <button id="startButton" class="btn btn-warning">Start Game</button>
+                <button id="endButton" class="btn btn-warning">End Game</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+<!-- The application JavaScript code -->
+<script src="js/app.js"></script>
+<script src="js/model/battleshipModel.js"></script>
+<script src="js/view/battleshipView.js"></script>
+<script src="js/controller/battleshipController.js"></script>
+
+</body>
+</html>
