@@ -20,11 +20,7 @@ function BattleshipView(container, battleshipModel) {
     this.grid = this.container.find("#grid");
     this.grid.html(this.drawGrid());
     this.gridButtons = this.grid.children().children();
-
-    // Hur man kmr åt en enstaka ruta
-    //this.gridButtons.eq(10).css( "background-color", "red" );
-    // Vet ej varför inte [10] funkar... den får nåt annat objekt då
-
+    
     this.placedShips = this.container.find("#placedShips");
     this.sunkenShips = this.container.find("#sunkenShips");
     this.totalShots = this.container.find("#totalShots");
