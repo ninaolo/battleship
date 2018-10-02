@@ -3,6 +3,9 @@ This is a simple game of Battleship written in JavaScript. It was a school proje
 
 NOTE: this app is written with a very simple/basic and old style of JavaScript.
 
+## See the app live
+Go to [https://ninaolo.github.io/battleship](https://ninaolo.github.io/battleship) and see the app live!
+
 ## Running the app
 Simply open `index.html` in a browser and start playing.
 
