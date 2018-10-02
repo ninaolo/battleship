@@ -14,7 +14,7 @@ function BattleshipModel(size) {
     this.init();
 }
 
-BattleshipModel.prototype.init = function() {
+BattleshipModel.prototype.init = function () {
     this.placedShips = 0;
     this.sunkenShips = 0;
     this.totalShots = 0;
@@ -24,7 +24,7 @@ BattleshipModel.prototype.init = function() {
 
 }
 
-BattleshipModel.prototype.createNewBoard = function() {
+BattleshipModel.prototype.createNewBoard = function () {
     this.board = new Array(this.size);
     for (var row = 0; row < this.size; row++) {
         this.board[row] = new Array(this.size);
@@ -34,12 +34,12 @@ BattleshipModel.prototype.createNewBoard = function() {
     }
 }
 
-BattleshipModel.prototype.placeShip = function(x, y,selectedShip) {
-    if(selectedShip === null){
-        for(var i=0;i<this.ships.length;i++){
+BattleshipModel.prototype.placeShip = function (x, y, selectedShip) {
+    if (selectedShip === null) {
+        for (var i = 0; i < this.ships.length; i++) {
             var tempSelectedShip = this.ships[i];
-            if(tempSelectedShip.isPlaced){
-                if(tempSelectedShip.validRemove(x,y)){
+            if (tempSelectedShip.isPlaced) {
+                if (tempSelectedShip.validRemove(x, y)) {
                     this.clearPositions(tempSelectedShip);
                     tempSelectedShip.removeShip();
                 }
@@ -47,17 +47,17 @@ BattleshipModel.prototype.placeShip = function(x, y,selectedShip) {
         }
     }
 
-    else if(this.validPlacement(x,y,selectedShip)){
+    else if (this.validPlacement(x, y, selectedShip)) {
         var isHorizantal = selectedShip.isHorizantal;
-        for(var i=0;i<selectedShip.size;i++){
-            this.board[x+(i*isHorizantal)][y+(i*(!isHorizantal))] = this.CONST_SHIP;
+        for (var i = 0; i < selectedShip.size; i++) {
+            this.board[x + (i * isHorizantal)][y + (i * (!isHorizantal))] = this.CONST_SHIP;
         }
         this.clearPositions(selectedShip);
-        selectedShip.setPosition(x,y);
+        selectedShip.setPosition(x, y);
         this.placedShips += 1;
     }
 
-    else if(selectedShip.validRemove(x,y)){
+    else if (selectedShip.validRemove(x, y)) {
         this.clearPositions(selectedShip);
         selectedShip.removeShip();
     }
@@ -65,21 +65,21 @@ BattleshipModel.prototype.placeShip = function(x, y,selectedShip) {
 }
 
 // Both used for creating new and doing reset of ships
-BattleshipModel.prototype.createNewShips = function() {
+BattleshipModel.prototype.createNewShips = function () {
     this.ships = new Array();
-    this.ships.push(new ShipModel(5,"Aircraft carrier"));
-    this.ships.push(new ShipModel(4,"Battleship"));
-    this.ships.push(new ShipModel(3,"Submarine"));
-    this.ships.push(new ShipModel(3,"Cruiser"));
-    this.ships.push(new ShipModel(2,"Destroyer"));
+    this.ships.push(new ShipModel(5, "Aircraft carrier"));
+    this.ships.push(new ShipModel(4, "Battleship"));
+    this.ships.push(new ShipModel(3, "Submarine"));
+    this.ships.push(new ShipModel(3, "Cruiser"));
+    this.ships.push(new ShipModel(2, "Destroyer"));
 }
 
 
-BattleshipModel.prototype.computerGeneratePositions = function(){
+BattleshipModel.prototype.computerGeneratePositions = function () {
     //Clear all placed ships
-    for(var i=0;i<this.ships.length;i++){
+    for (var i = 0; i < this.ships.length; i++) {
         var tempSelectedShip = this.ships[i];
-        if(tempSelectedShip.isPlaced){
+        if (tempSelectedShip.isPlaced) {
             this.clearPositions(tempSelectedShip);
             tempSelectedShip.removeShip();
         }
@@ -87,19 +87,19 @@ BattleshipModel.prototype.computerGeneratePositions = function(){
 
     //Iterate until all ships are placed
 
-    for(var i=0;i<this.ships.length;i++){
+    for (var i = 0; i < this.ships.length; i++) {
         var selectedShip = this.ships[i];
         selectedShip.isHorizantal = this.randomBoolean();
-        while(!selectedShip.isPlaced){
-            var x = Math.floor(Math.random() * (this.board.length-1))
-            var y = Math.floor(Math.random() * (this.board.length-1))
-            this.placeShip(x,y,selectedShip);
+        while (!selectedShip.isPlaced) {
+            var x = Math.floor(Math.random() * (this.board.length - 1))
+            var y = Math.floor(Math.random() * (this.board.length - 1))
+            this.placeShip(x, y, selectedShip);
         }
     }
 }
 
 
-BattleshipModel.prototype.randomBoolean = function() {
+BattleshipModel.prototype.randomBoolean = function () {
     var val = Math.round(Math.random())
     if (val > 0) {
         return false;
@@ -107,24 +107,24 @@ BattleshipModel.prototype.randomBoolean = function() {
     return true;
 }
 
-BattleshipModel.prototype.clearPositions = function(selectedShip){
+BattleshipModel.prototype.clearPositions = function (selectedShip) {
     var array = selectedShip.getPosition();
 
-    for(var i=0;i<array.length;i++){
-        if(selectedShip.isPlaced){
-        this.board[array[i][0]][array[i][1]] = this.CONST_EMPTY;
+    for (var i = 0; i < array.length; i++) {
+        if (selectedShip.isPlaced) {
+            this.board[array[i][0]][array[i][1]] = this.CONST_EMPTY;
         }
     }
 
-    if(selectedShip.isPlaced){
+    if (selectedShip.isPlaced) {
         this.placedShips -= 1;
     }
 }
 
 
-BattleshipModel.prototype.gameOver = function() {
-    for(var i = 0; i < this.ships.length; i++) {
-        if(!this.ships[i].isSunken) {
+BattleshipModel.prototype.gameOver = function () {
+    for (var i = 0; i < this.ships.length; i++) {
+        if (!this.ships[i].isSunken) {
             return false;
         }
     }
@@ -132,57 +132,57 @@ BattleshipModel.prototype.gameOver = function() {
 }
 
 
-BattleshipModel.prototype.hasShip = function(x, y) {
+BattleshipModel.prototype.hasShip = function (x, y) {
     return this.board[x][y] === this.CONST_SHIP;
 }
 
-BattleshipModel.prototype.isHit = function(x, y) {
+BattleshipModel.prototype.isHit = function (x, y) {
     return this.board[x][y] === this.CONST_HIT;
 }
 
-BattleshipModel.prototype.isMiss = function(x, y) {
+BattleshipModel.prototype.isMiss = function (x, y) {
     return this.board[x][y] === this.CONST_MISS;
 }
 
-BattleshipModel.prototype.shoot = function(x, y) {
-    if (this.board[x][y] === this.CONST_EMPTY&&(!this.gameOver())) {
+BattleshipModel.prototype.shoot = function (x, y) {
+    if (this.board[x][y] === this.CONST_EMPTY && (!this.gameOver())) {
         this.board[x][y] = this.CONST_MISS;
         this.totalShots += 1;
     } else if (this.board[x][y] === this.CONST_SHIP) {
         this.board[x][y] = this.CONST_HIT;
-        var selectedShip = this.getSelectedShip(x,y);
-        selectedShip.hit(x,y);
-        if(selectedShip.checkIfSunken()){
-            alert("YOU SUNK THE "+selectedShip.name+"!!!!!");
+        var selectedShip = this.getSelectedShip(x, y);
+        selectedShip.hit(x, y);
+        if (selectedShip.checkIfSunken()) {
+            alert("YOU SUNK THE " + selectedShip.name + "!!!!!");
             this.sunkenShips += 1;
         }
-        else{
-            alert("HIT! You hit the "+selectedShip.name + ".");
+        else {
+            alert("HIT! You hit the " + selectedShip.name + ".");
         }
         this.totalShots += 1;
-        if(this.gameOver()){
-            alert("You won! You sank all the ships with "+this.totalShots+" shots.");
+        if (this.gameOver()) {
+            alert("You won! You sank all the ships with " + this.totalShots + " shots.");
         }
     }
 }
 
-BattleshipModel.prototype.validPlacement = function(x,y,selectedShip){
+BattleshipModel.prototype.validPlacement = function (x, y, selectedShip) {
     var isHorizantal = selectedShip.isHorizantal;
     var size = selectedShip.size;
-    if((x+size*isHorizantal)>this.board.length || (y+size*(!isHorizantal))>this.board.length){
+    if ((x + size * isHorizantal) > this.board.length || (y + size * (!isHorizantal)) > this.board.length) {
         return false;
     }
-    for(var i=0;i<size;i++){
-        if(this.hasShip((x+i*isHorizantal),(y+i*(!isHorizantal)))){
+    for (var i = 0; i < size; i++) {
+        if (this.hasShip((x + i * isHorizantal), (y + i * (!isHorizantal)))) {
             return false;
         }
     }
     return true;
 }
 
-BattleshipModel.prototype.allShipsPlaced = function(){
-    for(var i=0;i<this.ships.length;i++){
-        if(!this.ships[i].isPlaced){
+BattleshipModel.prototype.allShipsPlaced = function () {
+    for (var i = 0; i < this.ships.length; i++) {
+        if (!this.ships[i].isPlaced) {
             return false;
         }
     }
@@ -190,9 +190,9 @@ BattleshipModel.prototype.allShipsPlaced = function(){
 }
 
 
-BattleshipModel.prototype.getSelectedShip = function(x,y){
-    for(var i=0;i<this.ships.length;i++){
-        if(this.ships[i].validRemove(x,y)){
+BattleshipModel.prototype.getSelectedShip = function (x, y) {
+    for (var i = 0; i < this.ships.length; i++) {
+        if (this.ships[i].validRemove(x, y)) {
             return this.ships[i];
         }
     }
@@ -200,8 +200,7 @@ BattleshipModel.prototype.getSelectedShip = function(x,y){
 }
 
 
-
-function ShipModel(size,name) {
+function ShipModel(size, name) {
 
     this.size = size;
     this.name = name;
@@ -212,23 +211,23 @@ function ShipModel(size,name) {
     //The array takes in [x,y,hit], the "hit" is either false when not hit and true when hit
     this.position = new Array()
 
-    for(var i = 0;i<this.size;i++){
-        this.position.push([null,null,false]);
+    for (var i = 0; i < this.size; i++) {
+        this.position.push([null, null, false]);
     }
 
 }
 
-ShipModel.prototype.setPosition = function(x,y){
-    for(var i = 0;i<this.size;i++){
-        this.position[i][0] = (x+(i*this.isHorizantal));
-        this.position[i][1] = (y+(i*(!this.isHorizantal)));
+ShipModel.prototype.setPosition = function (x, y) {
+    for (var i = 0; i < this.size; i++) {
+        this.position[i][0] = (x + (i * this.isHorizantal));
+        this.position[i][1] = (y + (i * (!this.isHorizantal)));
     }
     this.isPlaced = true;
 }
 
-ShipModel.prototype.removeShip = function(x,y){
-    if(this.validRemove(x,y)){
-        for(var i = 0;i<this.size;i++){
+ShipModel.prototype.removeShip = function (x, y) {
+    if (this.validRemove(x, y)) {
+        for (var i = 0; i < this.size; i++) {
             this.position[i][0] = null;
             this.position[i][1] = null;
         }
@@ -237,31 +236,31 @@ ShipModel.prototype.removeShip = function(x,y){
 }
 
 
-ShipModel.prototype.validRemove = function(x,y){
-    for(var i = 0;i<this.size;i++){
-        if(this.position[i][0] === x && this.position[i][1] === y){
+ShipModel.prototype.validRemove = function (x, y) {
+    for (var i = 0; i < this.size; i++) {
+        if (this.position[i][0] === x && this.position[i][1] === y) {
             return true;
         }
     }
     return false;
 }
 
-ShipModel.prototype.hit = function(x,y){
-    for(var i = 0;i<this.size;i++){
-        if(this.position[i][0] === x && this.position[i][1] === y){
+ShipModel.prototype.hit = function (x, y) {
+    for (var i = 0; i < this.size; i++) {
+        if (this.position[i][0] === x && this.position[i][1] === y) {
             this.position[i][2] = true;
         }
     }
 }
 
 
-ShipModel.prototype.getPosition = function(){
+ShipModel.prototype.getPosition = function () {
     return this.position;
 }
 
-ShipModel.prototype.checkIfSunken = function(){
-    for(var i = 0;i<this.size;i++){
-        if(this.position[i][2] === false){
+ShipModel.prototype.checkIfSunken = function () {
+    for (var i = 0; i < this.size; i++) {
+        if (this.position[i][2] === false) {
             return false;
         }
     }

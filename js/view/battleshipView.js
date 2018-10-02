@@ -32,21 +32,21 @@ function BattleshipView(container, battleshipModel) {
 
 }
 
-BattleshipView.prototype.drawGrid = function() {
+BattleshipView.prototype.drawGrid = function () {
     var html = "";
 
     for (var row = 0; row < this.gridSize; row++) {
         html += "<div class='row'>";
 
         for (var col = 0; col < this.gridSize; col++) {
-            html += "<button data-x=" + col + " data-y=" + (this.gridSize-row-1) + " class='btn btn-primary'>.</button>";
+            html += "<button data-x=" + col + " data-y=" + (this.gridSize - row - 1) + " class='btn btn-primary'>.</button>";
         }
         html += "</div>";
     }
     return html;
 }
 
-BattleshipView.prototype.createShipButtons = function() {
+BattleshipView.prototype.createShipButtons = function () {
     var html = "";
 
     for (var i = 0; i < this.battleshipModel.ships.length; i++) {
@@ -56,7 +56,7 @@ BattleshipView.prototype.createShipButtons = function() {
     this.ships.html(html);
 }
 
-BattleshipView.prototype.updateShipButtons = function(shooting) {
+BattleshipView.prototype.updateShipButtons = function (shooting) {
     for (var i = 0; i < this.battleshipModel.ships.length; i++) {
         if (this.battleshipModel.ships[i].isPlaced) {
             $("[data-shipID=" + i + "]").hide(300);
@@ -72,9 +72,9 @@ BattleshipView.prototype.updateShipButtons = function(shooting) {
     }
 }
 
-BattleshipView.prototype.updateGrid = function(shooting) {
+BattleshipView.prototype.updateGrid = function (shooting) {
 
-    for(var i = 0; i < this.gridButtons.length; i++) {
+    for (var i = 0; i < this.gridButtons.length; i++) {
 
         var x = this.gridButtons[i].getAttribute("data-x");
         var y = this.gridButtons[i].getAttribute("data-y");
@@ -98,12 +98,12 @@ BattleshipView.prototype.updateGrid = function(shooting) {
     }
 }
 
-BattleshipView.prototype.addNewPlayedGame = function(playerID, shots,playerVsComputer) {
+BattleshipView.prototype.addNewPlayedGame = function (playerID, shots, playerVsComputer) {
     var ai = "";
-    if(playerVsComputer){
+    if (playerVsComputer) {
         ai = " vs AI";
     }
-    this.container.find("#playerID").append("<h2>P" + playerID + ai+"</h2>");
+    this.container.find("#playerID").append("<h2>P" + playerID + ai + "</h2>");
     if (shots === 0) {
         this.container.find("#nrOfShots").append("<h2>lost game</h2>");
     } else {
@@ -112,7 +112,7 @@ BattleshipView.prototype.addNewPlayedGame = function(playerID, shots,playerVsCom
 
 }
 
-BattleshipView.prototype.updateScoreBoard = function(shooting) {
+BattleshipView.prototype.updateScoreBoard = function (shooting) {
     this.placedShips.html(this.battleshipModel.placedShips);
     this.sunkenShips.html(this.battleshipModel.sunkenShips);
     this.totalShots.html(this.battleshipModel.totalShots);
