@@ -2,7 +2,6 @@
 "use strict";
 
 function BattleshipController(battleshipView, battleshipModel) {
-
     this.battleshipModel = battleshipModel;
     this.battleshipView = battleshipView;
     this.shooting = false;
@@ -10,13 +9,11 @@ function BattleshipController(battleshipView, battleshipModel) {
     this.setEventListeners();
     this.playerID = 1;
     this.playerVsComputer = false;
+
     $('#playerText').html("PLAYER " + this.playerID);
-
-
 }
 
 BattleshipController.prototype.setEventListeners = function () {
-
     for (var i = 0; i < this.battleshipView.gridButtons.length; i++) {
         $(this.battleshipView.gridButtons[i]).on("click", this.gridClick.bind(this));
         $(this.battleshipView.gridButtons[i]).on("mouseenter", this.hoverEffect.bind(this));

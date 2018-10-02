@@ -29,7 +29,6 @@ function BattleshipView(container, battleshipModel) {
     this.sunkenShips = this.container.find("#sunkenShips");
     this.totalShots = this.container.find("#totalShots");
     this.updateScoreBoard();
-
 }
 
 BattleshipView.prototype.drawGrid = function () {
@@ -109,7 +108,6 @@ BattleshipView.prototype.addNewPlayedGame = function (playerID, shots, playerVsC
     } else {
         this.container.find("#nrOfShots").append("<h2>" + shots + " shots</h2>");
     }
-
 }
 
 BattleshipView.prototype.updateScoreBoard = function (shooting) {
