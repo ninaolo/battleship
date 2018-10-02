@@ -28,13 +28,13 @@ BattleshipController.prototype.setEventListeners = function () {
     for (var i = 0; i < this.battleshipView.shipButtons.length; i++) {
         $(this.battleshipView.shipButtons[i]).on("click", this.selectShip.bind(this));
     }
-}
+};
 
 
 BattleshipController.prototype.selectShip = function (e) {
     var shipID = e.target.getAttribute('data-shipID');
     this.selectedShip = this.battleshipModel.ships[shipID];
-}
+};
 
 BattleshipController.prototype.gridClick = function (e) {
     var x = parseInt(e.target.getAttribute('data-x'));
@@ -45,7 +45,7 @@ BattleshipController.prototype.gridClick = function (e) {
         this.placeShip(x, y);
         this.battleshipView.updateShipButtons();
     }
-}
+};
 
 BattleshipController.prototype.hoverEffect = function (e) {
     if (!(this.selectedShip === null) && !this.shooting) {
@@ -56,7 +56,7 @@ BattleshipController.prototype.hoverEffect = function (e) {
             $("[data-x=" + (x + (i * isHorizantal)) + "][data-y=" + (y + (i * (!isHorizantal))) + "]").toggleClass("active");
         }
     }
-}
+};
 
 BattleshipController.prototype.placeShip = function (x, y) {
     this.battleshipModel.placeShip(x, y, this.selectedShip);
@@ -69,7 +69,7 @@ BattleshipController.prototype.placeShip = function (x, y) {
 
     this.battleshipView.updateGrid(this.shooting);
     this.battleshipView.updateScoreBoard(this.shooting);
-}
+};
 
 BattleshipController.prototype.startGame = function (e) {
     if (this.battleshipModel.allShipsPlaced()) {
@@ -92,7 +92,7 @@ BattleshipController.prototype.startGame = function (e) {
         alert("You need to place all your ships before you can start the game");
     }
 
-}
+};
 
 BattleshipController.prototype.endGame = function (e) {
     this.shooting = false;
@@ -110,14 +110,14 @@ BattleshipController.prototype.endGame = function (e) {
     this.battleshipView.updateGrid(this.shooting);
     this.battleshipView.updateScoreBoard(this.shooting);
     this.battleshipView.updateShipButtons(this.shooting);
-}
+};
 
 BattleshipController.prototype.changeDirection = function () {
     var battleShips = this.battleshipModel.ships;
     for (var i = 0; i < battleShips.length; i++) {
         battleShips[i].isHorizantal = (!battleShips[i].isHorizantal)
     }
-}
+};
 
 BattleshipController.prototype.generatePositions = function () {
     this.playerVsComputer = true;
@@ -127,11 +127,11 @@ BattleshipController.prototype.generatePositions = function () {
     this.battleshipView.updateScoreBoard(this.shooting);
     this.battleshipView.updateShipButtons(this.shooting);
     this.battleshipView.startButton.click();
-}
+};
 
 
 BattleshipController.prototype.shoot = function (x, y) {
     this.battleshipModel.shoot(x, y);
     this.battleshipView.updateGrid(this.shooting);
     this.battleshipView.updateScoreBoard(this.shooting);
-}
+};

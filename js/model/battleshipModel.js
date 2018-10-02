@@ -21,7 +21,7 @@ BattleshipModel.prototype.init = function () {
     this.createNewBoard();
     this.createNewShips();
 
-}
+};
 
 BattleshipModel.prototype.createNewBoard = function () {
     this.board = new Array(this.size);
@@ -31,7 +31,7 @@ BattleshipModel.prototype.createNewBoard = function () {
             this.board[row][col] = this.CONST_EMPTY;
         }
     }
-}
+};
 
 BattleshipModel.prototype.placeShip = function (x, y, selectedShip) {
     if (selectedShip === null) {
@@ -60,7 +60,7 @@ BattleshipModel.prototype.placeShip = function (x, y, selectedShip) {
         this.clearPositions(selectedShip);
         selectedShip.removeShip();
     }
-}
+};
 
 // Both used for creating new and doing reset of ships
 BattleshipModel.prototype.createNewShips = function () {
@@ -70,8 +70,7 @@ BattleshipModel.prototype.createNewShips = function () {
     this.ships.push(new ShipModel(3, "Submarine"));
     this.ships.push(new ShipModel(3, "Cruiser"));
     this.ships.push(new ShipModel(2, "Destroyer"));
-}
-
+};
 
 BattleshipModel.prototype.computerGeneratePositions = function () {
     //Clear all placed ships
@@ -94,8 +93,7 @@ BattleshipModel.prototype.computerGeneratePositions = function () {
             this.placeShip(x, y, selectedShip);
         }
     }
-}
-
+};
 
 BattleshipModel.prototype.randomBoolean = function () {
     var val = Math.round(Math.random())
@@ -103,7 +101,7 @@ BattleshipModel.prototype.randomBoolean = function () {
         return false;
     }
     return true;
-}
+};
 
 BattleshipModel.prototype.clearPositions = function (selectedShip) {
     var array = selectedShip.getPosition();
@@ -117,7 +115,7 @@ BattleshipModel.prototype.clearPositions = function (selectedShip) {
     if (selectedShip.isPlaced) {
         this.placedShips -= 1;
     }
-}
+};
 
 BattleshipModel.prototype.gameOver = function () {
     for (var i = 0; i < this.ships.length; i++) {
@@ -126,19 +124,19 @@ BattleshipModel.prototype.gameOver = function () {
         }
     }
     return true;
-}
+};
 
 BattleshipModel.prototype.hasShip = function (x, y) {
     return this.board[x][y] === this.CONST_SHIP;
-}
+};
 
 BattleshipModel.prototype.isHit = function (x, y) {
     return this.board[x][y] === this.CONST_HIT;
-}
+};
 
 BattleshipModel.prototype.isMiss = function (x, y) {
     return this.board[x][y] === this.CONST_MISS;
-}
+};
 
 BattleshipModel.prototype.shoot = function (x, y) {
     if (this.board[x][y] === this.CONST_EMPTY && (!this.gameOver())) {
@@ -160,7 +158,7 @@ BattleshipModel.prototype.shoot = function (x, y) {
             alert("You won! You sank all the ships with " + this.totalShots + " shots.");
         }
     }
-}
+};
 
 BattleshipModel.prototype.validPlacement = function (x, y, selectedShip) {
     var isHorizantal = selectedShip.isHorizantal;
@@ -174,7 +172,7 @@ BattleshipModel.prototype.validPlacement = function (x, y, selectedShip) {
         }
     }
     return true;
-}
+};
 
 BattleshipModel.prototype.allShipsPlaced = function () {
     for (var i = 0; i < this.ships.length; i++) {
@@ -183,7 +181,7 @@ BattleshipModel.prototype.allShipsPlaced = function () {
         }
     }
     return true;
-}
+};
 
 BattleshipModel.prototype.getSelectedShip = function (x, y) {
     for (var i = 0; i < this.ships.length; i++) {
@@ -192,7 +190,7 @@ BattleshipModel.prototype.getSelectedShip = function (x, y) {
         }
     }
     return null;
-}
+};
 
 function ShipModel(size, name) {
 
@@ -216,7 +214,7 @@ ShipModel.prototype.setPosition = function (x, y) {
         this.position[i][1] = (y + (i * (!this.isHorizantal)));
     }
     this.isPlaced = true;
-}
+};
 
 ShipModel.prototype.removeShip = function (x, y) {
     if (this.validRemove(x, y)) {
@@ -226,7 +224,7 @@ ShipModel.prototype.removeShip = function (x, y) {
         }
     }
     this.isPlaced = false;
-}
+};
 
 
 ShipModel.prototype.validRemove = function (x, y) {
@@ -236,7 +234,7 @@ ShipModel.prototype.validRemove = function (x, y) {
         }
     }
     return false;
-}
+};
 
 ShipModel.prototype.hit = function (x, y) {
     for (var i = 0; i < this.size; i++) {
@@ -244,12 +242,12 @@ ShipModel.prototype.hit = function (x, y) {
             this.position[i][2] = true;
         }
     }
-}
+};
 
 
 ShipModel.prototype.getPosition = function () {
     return this.position;
-}
+};
 
 ShipModel.prototype.checkIfSunken = function () {
     for (var i = 0; i < this.size; i++) {
@@ -259,4 +257,4 @@ ShipModel.prototype.checkIfSunken = function () {
     }
     this.isSunken = true;
     return true;
-}
+};

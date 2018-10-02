@@ -2,7 +2,6 @@
 "use strict";
 
 function BattleshipView(container, battleshipModel) {
-
     this.container = container;
     this.battleshipModel = battleshipModel;
     this.gridSize = battleshipModel.size;
@@ -20,7 +19,7 @@ function BattleshipView(container, battleshipModel) {
     this.grid = this.container.find("#grid");
     this.grid.html(this.drawGrid());
     this.gridButtons = this.grid.children().children();
-    
+
     this.placedShips = this.container.find("#placedShips");
     this.sunkenShips = this.container.find("#sunkenShips");
     this.totalShots = this.container.find("#totalShots");
@@ -39,7 +38,7 @@ BattleshipView.prototype.drawGrid = function () {
         html += "</div>";
     }
     return html;
-}
+};
 
 BattleshipView.prototype.createShipButtons = function () {
     var html = "";
@@ -49,7 +48,7 @@ BattleshipView.prototype.createShipButtons = function () {
         html += "<br><br>"
     }
     this.ships.html(html);
-}
+};
 
 BattleshipView.prototype.updateShipButtons = function (shooting) {
     for (var i = 0; i < this.battleshipModel.ships.length; i++) {
@@ -61,11 +60,12 @@ BattleshipView.prototype.updateShipButtons = function (shooting) {
         $("#computerGenerate").show();
         $("#alignmentButton").show();
     }
+
     if (shooting) {
         $("#computerGenerate").hide();
         $("#alignmentButton").hide();
     }
-}
+};
 
 BattleshipView.prototype.updateGrid = function (shooting) {
 
@@ -91,7 +91,7 @@ BattleshipView.prototype.updateGrid = function (shooting) {
         }
 
     }
-}
+};
 
 BattleshipView.prototype.addNewPlayedGame = function (playerID, shots, playerVsComputer) {
     var ai = "";
@@ -104,10 +104,10 @@ BattleshipView.prototype.addNewPlayedGame = function (playerID, shots, playerVsC
     } else {
         this.container.find("#nrOfShots").append("<h2>" + shots + " shots</h2>");
     }
-}
+};
 
 BattleshipView.prototype.updateScoreBoard = function (shooting) {
     this.placedShips.html(this.battleshipModel.placedShips);
     this.sunkenShips.html(this.battleshipModel.sunkenShips);
     this.totalShots.html(this.battleshipModel.totalShots);
-}
+};
